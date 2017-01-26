@@ -1,0 +1,51 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+jar {
+	baseName = 'pnet'
+	version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile group: 'org.springframework.boot', 
+			name: 'spring-boot-starter-jersey', 
+			version: '1.4.1.RELEASE'
+
+	compile ('io.swagger:swagger-jersey2-jaxrs:1.5.3') {  
+    exclude group: 'org.glassfish.jersey.core', module: 'jersey-common'
+    exclude group: 'org.glassfish.jersey.core', module: 'jersey-server'
+    exclude group: 'org.glassfish.jersey.core', module: 'jersey-client'
+    exclude group: 'org.glassfish.jersey.containers', module: 'jersey-container-servlet-core'
+	}
+	compile ('io.swagger:swagger-jaxrs:1.5.3') {  
+	    exclude group: 'javax.ws.rs', module: 'jsr311-api'
+	}
+	compile ('io.swagger:swagger-annotations:1.5.3') {  
+	   exclude group: 'io.swagger', module: 'swagger-parser'
+	}
+	runtime('mysql:mysql-connector-java')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}

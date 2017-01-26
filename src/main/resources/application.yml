@@ -1,0 +1,16 @@
+datasource:
+    url: jdbc:hsqldb:mem:dataSource
+    username: sa
+    password:
+---
+spring:
+  jersey.type: filter
+  profiles.active: local
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/springbootjerseyDB
+    username: username
+    password: password
